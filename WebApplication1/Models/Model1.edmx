@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Etecpf2023DanielPedroModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tb_cachorro">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Idade" Type="int" Nullable="false" />
+          <Property Name="Raca" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="DonoId" Type="int" />
+        </EntityType>
+        <EntityType Name="tb_dono">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Idade" Type="int" Nullable="false" />
+          <Property Name="Profissao" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__tb_cachor__DonoI__29572725">
+          <End Role="tb_dono" Type="Self.tb_dono" Multiplicity="0..1" />
+          <End Role="tb_cachorro" Type="Self.tb_cachorro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_dono">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tb_cachorro">
+              <PropertyRef Name="DonoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Etecpf2023DanielPedroModelStoreContainer">
+          <EntitySet Name="tb_cachorro" EntityType="Self.tb_cachorro" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_dono" EntityType="Self.tb_dono" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__tb_cachor__DonoI__29572725" Association="Self.FK__tb_cachor__DonoI__29572725">
+            <End Role="tb_dono" EntitySet="tb_dono" />
+            <End Role="tb_cachorro" EntitySet="tb_cachorro" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Etecpf2023DanielPedroModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tb_cachorro">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Idade" Type="Int32" Nullable="false" />
+          <Property Name="Raca" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DonoId" Type="Int32" />
+          <NavigationProperty Name="tb_dono" Relationship="Self.FK__tb_cachor__DonoI__29572725" FromRole="tb_cachorro" ToRole="tb_dono" />
+        </EntityType>
+        <EntityType Name="tb_dono">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Idade" Type="Int32" Nullable="false" />
+          <Property Name="Profissao" Type="String" />
+          <NavigationProperty Name="tb_cachorro" Relationship="Self.FK__tb_cachor__DonoI__29572725" FromRole="tb_dono" ToRole="tb_cachorro" />
+        </EntityType>
+        <Association Name="FK__tb_cachor__DonoI__29572725">
+          <End Role="tb_dono" Type="Self.tb_dono" Multiplicity="0..1" />
+          <End Role="tb_cachorro" Type="Self.tb_cachorro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_dono">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tb_cachorro">
+              <PropertyRef Name="DonoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Etecpf2023DanielPedroEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tb_cachorro" EntityType="Self.tb_cachorro" />
+          <EntitySet Name="tb_dono" EntityType="Self.tb_dono" />
+          <AssociationSet Name="FK__tb_cachor__DonoI__29572725" Association="Self.FK__tb_cachor__DonoI__29572725">
+            <End Role="tb_dono" EntitySet="tb_dono" />
+            <End Role="tb_cachorro" EntitySet="tb_cachorro" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Etecpf2023DanielPedroModelStoreContainer" CdmEntityContainer="Etecpf2023DanielPedroEntities">
+          <EntitySetMapping Name="tb_cachorro">
+            <EntityTypeMapping TypeName="Etecpf2023DanielPedroModel.tb_cachorro">
+              <MappingFragment StoreEntitySet="tb_cachorro">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Idade" ColumnName="Idade" />
+                <ScalarProperty Name="Raca" ColumnName="Raca" />
+                <ScalarProperty Name="DonoId" ColumnName="DonoId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_dono">
+            <EntityTypeMapping TypeName="Etecpf2023DanielPedroModel.tb_dono">
+              <MappingFragment StoreEntitySet="tb_dono">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Idade" ColumnName="Idade" />
+                <ScalarProperty Name="Profissao" ColumnName="Profissao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
